@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VOTEX — 3D Online Voting Demo</title>
+  <meta name="description" content="VOTEX is a futuristic 3D online voting interface built as an educational demonstration. No backend, no real elections.">
+  <meta name="theme-color" content="#05060f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300c8ff'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%2305060f'/%3E%3Cpath d='M7 9l9 15 9-15' fill='none' stroke='url(%23g)' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="demo-banner" role="note">
+    <span class="pulse"></span>
+    Educational demonstration only — not a real election. Fictional candidates, no backend, data stays in your browser.
+  </div>
+
+  <header class="nav" id="top">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="VOTEX home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="bm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#00c8ff"/><stop offset="1" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+          <path d="M5 8l11 18L27 8" fill="none" stroke="url(#bm)" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>VOTEX</span>
+      </a>
+      <nav id="menu" class="menu" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#candidates">Candidates</a>
+        <a href="#vote">Vote</a>
+        <a href="#results">Results</a>
+      </nav>
+      <a href="#vote" class="btn btn-primary btn-sm nav-cta">Vote now</a>
+      <button class="burger" id="burger" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Aurora City Mayoral Election · Simulation</p>
+          <h1>The future of <span class="grad">voting</span>, rendered in 3D.</h1>
+          <p class="lead">VOTEX is an interactive showcase of a modern ballot experience: meet four fictional candidates, cast one demo vote, and watch the results update in real time.</p>
+          <div class="hero-cta">
+            <a href="#vote" class="btn btn-primary">Enter the voting booth</a>
+            <a href="#results" class="btn btn-ghost">View live results</a>
+          </div>
+          <ul class="chips" aria-label="Highlights">
+            <li><strong>4</strong> candidates</li>
+            <li><strong>1</strong> vote per browser</li>
+            <li><strong>0</strong> servers</li>
+          </ul>
+        </div>
+
+        <div class="scene" id="scene" aria-hidden="true">
+          <div class="tilt" id="tilt">
+            <div class="ring ring-a"></div>
+            <div class="ring ring-b"></div>
+            <div class="cube">
+              <div class="face f-front"><span>V</span></div>
+              <div class="face f-back"><span>X</span></div>
+              <div class="face f-right"><span>O</span></div>
+              <div class="face f-left"><span>T</span></div>
+              <div class="face f-top"><span>E</span></div>
+              <div class="face f-bottom"><span>✓</span></div>
+            </div>
+            <div class="core"></div>
+          </div>
+          <div class="floor"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Process</p>
+          <h2>Three steps. One demo vote.</h2>
+        </div>
+        <div class="steps">
+          <article class="step reveal" style="--delay:0ms">
+            <span class="step-no">01</span>
+            <h3>Explore the candidates</h3>
+            <p>Hover the 3D cards and open each profile to read their story and agenda.</p>
+          </article>
+          <article class="step reveal" style="--delay:90ms">
+            <span class="step-no">02</span>
+            <h3>Cast your ballot</h3>
+            <p>Select one candidate in the voting booth and confirm in the pop-up. Your choice is saved only in this browser.</p>
+          </article>
+          <article class="step reveal" style="--delay:180ms">
+            <span class="step-no">03</span>
+            <h3>Watch the results</h3>
+            <p>Animated bars and a donut chart update instantly. Reset the demo any time to start over.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CANDIDATES -->
+    <section class="section" id="candidates">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">The Field</p>
+          <h2>Meet the candidates</h2>
+          <p class="sub">All people and parties are fictional. Move your cursor over a card to tilt it in 3D.</p>
+        </div>
+        <div class="cards" id="cards"></div>
+      </div>
+    </section>
+
+    <!-- VOTING BOOTH -->
+    <section class="section" id="vote">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Voting Booth</p>
+          <h2>Cast your demo vote</h2>
+          <p class="sub">One vote per browser. Choose carefully — you can only change it by resetting the demo.</p>
+        </div>
+
+        <div class="booth panel reveal" id="booth">
+          <div class="booth-top">
+            <h3>Official demo ballot</h3>
+            <span class="status" id="boothStatus" aria-live="polite">Choose a candidate to continue.</span>
+          </div>
+
+          <div class="ballot-list" id="ballot" role="radiogroup" aria-label="Candidates"></div>
+
+          <div class="booth-actions">
+            <button class="btn btn-primary" id="castBtn" type="button" disabled>Cast my vote</button>
+            <button class="btn btn-ghost" id="clearBtn" type="button">Clear selection</button>
+          </div>
+
+          <div class="receipt" id="receipt" hidden>
+            <div class="receipt-icon" aria-hidden="true">✓</div>
+            <div>
+              <h4>Vote recorded</h4>
+              <p>You voted for <strong id="rcCandidate">—</strong></p>
+              <p class="mono">Receipt <span id="rcId">—</span> · <span id="rcTime">—</span></p>
+              <p class="fine">Demo receipt only. It is stored in this browser and verifies nothing.</p>
+            </div>
+            <div class="receipt-actions">
+              <a href="#results" class="btn btn-ghost btn-sm">See results</a>
+              <button class="btn btn-danger btn-sm js-reset" type="button">Reset demo</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section" id="results">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Live Dashboard</p>
+          <h2>Results</h2>
+          <p class="sub">Starts from seeded sample data so the dashboard has something to show. Your vote is added on top.</p>
+        </div>
+
+        <div class="results-grid">
+          <div class="panel results-bars reveal" id="bars"></div>
+
+          <aside class="panel results-side reveal">
+            <div class="donut" id="donut" role="img" aria-label="Vote share donut chart">
+              <div class="donut-hole">
+                <span class="donut-num" id="totalVotes">0</span>
+                <span class="donut-lbl">total votes</span>
+              </div>
+            </div>
+
+            <ul class="stat-list">
+              <li><span>Leading</span><strong id="statLeader">—</strong></li>
+              <li><span>Lead margin</span><strong id="statMargin">—</strong></li>
+              <li><span>Your vote</span><strong id="statYou">Not cast</strong></li>
+              <li><span>Updated</span><strong id="statTime">—</strong></li>
+            </ul>
+
+            <div class="side-actions">
+              <button class="btn btn-ghost" id="simBtn" type="button" aria-pressed="false">
+                <span class="live-dot"></span><span id="simLabel">Start live simulation</span>
+              </button>
+              <button class="btn btn-danger js-reset" type="button">Reset demo</button>
+            </div>
+            <p class="fine">Simulated votes are random and only change this browser's demo tally. Open VOTEX in two tabs to watch them sync.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a href="#top" class="brand"><span>VOTEX</span></a>
+        <p class="fine">Built with plain HTML, CSS and JavaScript. No backend, no tracking, no accounts.</p>
+      </div>
+      <p class="fine disclaimer">
+        <strong>Disclaimer:</strong> VOTEX is an educational demonstration. Real elections require identity verification, secure servers, audit trails and legal oversight. A localStorage flag is trivially bypassable and must never be used to protect real votes.
+      </p>
+    </div>
+  </footer>
+
+  <!-- PROFILE MODAL -->
+  <div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="pmName" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" id="pmCard">
+      <button class="modal-x" type="button" data-close aria-label="Close">×</button>
+      <div class="pm-head">
+        <div id="pmAvatar"></div>
+        <div>
+          <h3 id="pmName">—</h3>
+          <p class="party" id="pmParty">—</p>
+          <p class="slogan" id="pmSlogan">—</p>
+        </div>
+      </div>
+      <p id="pmBio" class="pm-bio"></p>
+      <dl class="pm-facts">
+        <div><dt>Age</dt><dd id="pmAge">—</dd></div>
+        <div><dt>Background</dt><dd id="pmBg">—</dd></div>
+      </dl>
+      <h4>Agenda</h4>
+      <ol class="agenda" id="pmAgenda"></ol>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" type="button" data-close>Close</button>
+        <button class="btn btn-primary" type="button" id="pmPick">Choose this candidate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRM MODAL -->
+  <div class="modal" id="confirmModal" role="alertdialog" aria-modal="true" aria-labelledby="cfTitle" aria-describedby="cfText" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card small">
+      <div class="cf-avatar" id="cfAvatar"></div>
+      <h3 id="cfTitle">Confirm your vote</h3>
+      <p id="cfText">You are about to vote for <strong id="cfName">—</strong>.</p>
+      <p class="fine">This demo allows one vote per browser. You can only change it by resetting the demo.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" type="button" data-close data-autofocus>Go back</button>
+        <button class="btn btn-primary" type="button" id="cfConfirm">Confirm vote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESET MODAL -->
+  <div class="modal" id="resetModal" role="alertdialog" aria-modal="true" aria-labelledby="rsTitle" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card small">
+      <h3 id="rsTitle">Reset the demo?</h3>
+      <p>This clears your saved vote and restores the sample tally. Nothing else is affected.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" type="button" data-close data-autofocus>Cancel</button>
+        <button class="btn btn-danger" type="button" id="rsConfirm">Reset demo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
